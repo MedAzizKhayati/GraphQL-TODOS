@@ -6,7 +6,7 @@ export const Mutation = {
         }
         newTodo.status = "WAITING"
         db.todos.push(newTodo);
-        pubsub.publish('newTodo', {newTodo})
+        pubsub.publish('todoAddition', {todoAddition: newTodo})
         return newTodo;
     },
 
@@ -21,7 +21,7 @@ export const Mutation = {
         }
         const updatedTodo = {...db.todos[todoIndex], ...updateTodoInput};
         db.todos[todoIndex] = updatedTodo;
-        pubsub.publish('todoUpdated', {updatedTodo})
+        pubsub.publish('todoUpdate', {todoUpdate: updatedTodo})
         
         return updatedTodo;
     },
@@ -32,7 +32,7 @@ export const Mutation = {
             throw new Error(`Todo with id ${id} not found`);
         }
         const deletedTodo = db.todos.splice(todoIndex, 1)[0];
-        pubsub.publish('todoDeleted', { deletedTodo });
+        pubsub.publish('todoDeletion', {todoDeletion: deletedTodo });
         return deletedTodo;
     }
 }
