@@ -1,6 +1,5 @@
-import { db } from "../data/db.js";
 export const Todo = {
-    user: ({ user }) => {
+    user: ({ user }, _, {db}) => {
         return db.users.find((u) => u.id === user);
     },
 };

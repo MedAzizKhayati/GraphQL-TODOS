@@ -6,8 +6,21 @@ type Query {
   getUserById(id: Int): User!
 }
 
+type Mutation {
+  addTodo(addTodoInput: AddTodoInput!): Todo!
+  updateTodo(id: Int!, updateTodoInput: UpdateTodoInput!): Todo!
+  deleteTodo(id: Int!): Todo!
+}
+
+type Subscription {
+  todoAddition: Todo!
+  todoUpdate: Todo!
+  todoDeletion: Todo!
+}
+
+
 type Todo {
-  id: ID!
+  id: Int!
   name: String!
   content: String!
   status: TodoStatusEnum!
@@ -22,10 +35,21 @@ enum TodoStatusEnum {
 }
 
 type User {
-  id: ID!
+  id: Int!
   name: String!
   email: String!
   todos: [Todo]
 }
 
+input AddTodoInput {
+  name: String!
+  content: String!
+  user: Int!
+}
 
+input UpdateTodoInput {
+  name: String
+  content: String
+  status: TodoStatusEnum
+  user: Int
+}
